@@ -1,24 +1,34 @@
 # Bluetooth controlled car from a dumped RC car
-
-I bought a 5€ car in a toy shop for my son. Ultimately it should have been a 1/10, 1/8 RC car, but for unknown reason, the car mounting was unfinished : no battery plugs, no remote control. I thought it can be fun to finish that work.
+Recently I bought a 5€ worth car in a toy shop for my son. Ultimately it should have been a 1/10 or 1/8 RC car, but for unknown reason, the car mounting was unfinished : no battery plugs, no remote control. I thought it can be fun to finish that work.
 Inside the car, there is a circuit board and 2 DC motors. The board barely discloses any information. It accepts 4.5V as input, has a 2.4 Ghz RF chip and that's it.
-Instead, I'd install a MCU with a bluetooth receiver and a L293D chip to control the 2 motors. The controller also contains a bluetooth MCU, a 4 directionnal joystick and a switch.
+Instead, I'd install a MCU with a bluetooth receiver and a L293D chip to control the 2 motors. The controller also contains a bluetooth MCU, two 4-directionnal joysticks and a switch.
 
 ![Inside the car](_media/unknown_chip_car_S.png)
 
 > Steps
 >  
-> 1. Make the controller and the joystick operational
+> 1. Make the controller and the joysticks operationals
 > 2. Connect and transfer data between two bluetooth chips
 > 3. Set up the L293D module and make the motors responsive
 > 4. Final configurations and evolutions
 
 ## Tools and hardware
 
-* 2 ESP32 MCU
-* 1 4-direction joystick
+For the controller:
+
+* 1 ESP32 MCU
+* 2 4-direction joystick
 * 1 switch
+* 1 MT3608 Step-up converter
+* 1 3.7V Li-ion battery
+
+For the car :
+
+* 1 ESP32 MCU
 * 1 L293D
+* 1 LM2596S Step-down converter
+* 1 3.7V Li-ion battery
+* 1 9V alcaline battery
 
 ## The controller
 
