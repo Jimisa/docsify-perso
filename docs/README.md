@@ -1,13 +1,4 @@
-# Titre
-
-```python
-def anytime():
-    return True
-```
-
-```html
-<div id="item">this is it!</div>
-```
+# Index
 
 ## Projets perso
 
