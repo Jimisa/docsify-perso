@@ -1,8 +1,13 @@
-#  
+# Titre
 
-> Here are grouped docs about personal projects and courses to achieve them.
+```python
+def anytime():
+    return True
+```
 
-?> Info
+```html
+<div id="item">this is it!</div>
+```
 
 ## Projets perso
 

@@ -1,4 +1,4 @@
-# Learn Python
+# Learn Python 3
 
 __Python__ has been created by Guido Van Rossum in 1989. It is now is widely used, from programming learning to Machine Learning, from universities to GAFA back-end product.
 
