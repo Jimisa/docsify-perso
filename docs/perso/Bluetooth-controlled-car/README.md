@@ -262,6 +262,14 @@ void loop() {
 }
 ```
 
+Setup in a cardboard:
+
+![controller](_media/r20_IMG_20210702_104955.jpg ':size=30%')
+
+Blue LED is lit while no connection with the car:
+
+![led](_media/r20_IMG_20210702_105046.jpg ':size=30%')
+
 ## The car
 
 ![schema](_media/fritzing_car.png ':size=50%')
@@ -453,9 +461,19 @@ void loop() {
 }
 ```
 
+Setup in the car box :
+
+![car](_media/r20_IMG_20210618_143037.jpg ':size=30%')
+
 ## Tests and evolutions
+
+![final](_media/r20_IMG_20210702_110607.jpg ':size=30%')
 
 ?> TODO list
 
-- [ ] Add a second potentiometer to separate steering and thrust controls
-- [ ] Change the 9V battery for powering the motors (more capacity)
+* [ ] Add a second potentiometer to separate steering and thrust controls
+* [ ] Change the 9V battery for powering the motors (more capacity)
+
+## Sources
+
+[L293D principles (french)](https://wiki.mchobby.be/index.php?title=Hack-micropython-L293D)
