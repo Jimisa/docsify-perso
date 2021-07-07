@@ -9,3 +9,5 @@
 ## Cours
 
 [Python](cours/Python/README.md)
+
+[Django](cours/Django/README.md)
