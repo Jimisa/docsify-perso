@@ -302,18 +302,29 @@ primary_key|only one per column
 validators|list of [validators](https://docs.djangoproject.com/en/2.2/ref/validators/)
 ...|...
 
+Any model should have a `__str__(self)` method if it means to be displayed by the admin app.
+
 As you change models in the `models.py` file, you must appply for these changes in the framework:
 
 ```bash
 python manage.py makemigrations myapp
 ```
 
-A migration file is created (in `mayapp/migrations/` folder).
+A migration file is created (in `mayapp/migrations/` folder), `/0001_initial.py` reflecting all changes to be made. Each app of the project relying on DB will have its migrate folder. The `sqlmigrate` command outputs a SQL statement reflecting these changes, according to each DB provider SQL specifications.
 
 then the changes in the database are updated:
 
 ```bash
-python manage.py migrate myapp
+python manage.py migrate myapp # specific to the app
+```
+
+To let the admin app access the app's models, it must be register in admin.py:
+
+```python
+from django.contrib import admin
+from .models import Post
+
+admin.site.register(Post)
 ```
 
 ### ORM and querysets
@@ -348,7 +359,7 @@ Post.objects.order_by('created_date')
 Post.objects.order_by('-created_date')
 ```
 
-## Django Admin
+## Django admin
 
 To log in the admin dashboard, you must create a superuser:
 
@@ -386,18 +397,45 @@ urlpatterns = [
 ]
 ```
 
+with the `name` args, it is easier to manage urls. In template, for example a link to `post_list` will be :
+
+```html
+<a href="{% url 'post_list' %}">{{ value }}</a>
+```
+
+To isolate same view name from different apps in the same project, use a namespacing URL name in `urls.py`:
+
+```python
+from . import views
+
+app_name='blog`
+urlpatterns= [
+    #...
+]
+```
+
+then the view template looks like:
+
+```html
+<a href="{% url 'blog:post_list' %}">{{ value }}</a>
+```
+
 ## [Django views](https://docs.djangoproject.com/en/2.2/topics/http/urls/)
 
-`Views` in __Django__ take a web request as input parameter and returns a web response.
+`Views` in __Django__ take a web request as input parameter and returns a [http response](https://docs.djangoproject.com/en/2.2/ref/request-response/#django.http.HttpResponse) or raises an exception.
 
-the response can be either :
+The response can be either :
 
-* HTML contents from a webpage
+* HTML contents
 * a redirect
 * a 404 error
 * XML document
 * an image
+* a PDF file
+* generate a ZIP file
 * ...
+
+using any Python librairy.
 
 ```python
 from django.http import HttpResponse
@@ -417,6 +455,27 @@ from django.shortcuts import render
 def post_lit(request):
     return render(request, 'blog/post_list.html',{})
 ```
+
+Here `render(request, template.html, context)` is the same as:
+
+```python
+HttpResponse(template.render(context,request))
+
+# with
+from django.template import loader
+template = loader.get_template('template.html')
+```
+
+Views can be either function, or a [class](https://docs.djangoproject.com/en/2.2/topics/class-based-views/).
+
+### [Django template](https://docs.djangoproject.com/en/2.2/topics/templates/#the-django-template-language)
+
+type|Implementation
+-|-
+Variable|`{{ first_name }}` with `first_name` provided in a _context_ ({`first_name:'joe'}`) or `{{ list.0 }}`
+[Filter](https://docs.djangoproject.com/en/2.2/ref/templates/builtins/#ref-templates-builtins-filters)|`{{ my_date|date:"Y-m-d" }}`
+Comment|`{{# a comment #}}`
+[Tags](https://docs.djangoproject.com/en/2.2/ref/templates/builtins/#ref-templates-builtins-tags)|`{% extends "base.html" %}`
 
 ## [Django forms](https://docs.djangoproject.com/en/2.2/topics/forms/)
 
@@ -451,6 +510,7 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request,'myapp/post_edit.html',{'form': form})
+```
 
 ## Sources
 
