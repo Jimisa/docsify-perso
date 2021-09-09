@@ -31,6 +31,8 @@ Faster interpreter (ex pyPy or Pandas, NumPy for DataScience) can be used instea
 >   * Data Science
 >   * DB application
 
+[pythontutor] are webpages to edit python code and vizualise execution sequences.
+
 ## Virtual Environment
 
 Virtual environments is an encapsulation of the the interpreter and required libraries. Therefore 2 Python projects will use the version of each library, skipping potential version compatibilities.
