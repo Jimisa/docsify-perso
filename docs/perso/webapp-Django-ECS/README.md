@@ -417,9 +417,33 @@ Build again and check on `localhost:1337/admin`, the admin app is served with st
 
 ![screenshot](_media/screenshot_1626108623.png)
 
+Thanks to __Tirth Jain__ for his [tutorial](https://blog.bitsacm.in/django-on-docker/) for this part.
+
 ## Build the AWS infrastructure
 
-TODO
+AWS provides lots of service to publish a web application. One of them, [__Elastic Container Service__](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) (ECS) manage containers on AWS infrastructure, scalling a cluster on EC2 instances or with AWS Fargate (serverless container runtime service).
+
+![screenshot](_media/screenshot_1626254884.png)
+
+AWS ressources required | role
+-|-
+Cluster|Logical group of tasks or services (EC2 or Fargate)
+Task definition|describes containers and parameters (network, volumes...) in JSON format
+Service|definitions of how a task definition should run (numbers of simultanously tasks+load balancer used)
+Task|a Docker container run based on its definition
+Container instance| eq. to EC2 instance
+Container agent| inside a container instance, it manages tasks life and send information to ECS
+
+Before creating the service, it is good-pratice to get structure upon which ECS is built:
+
+1. a VPC with 2 subnets
+2. a Security Group
+3. 3 Security Group Ingress (for ssh and container and public access)
+4. a IAM role (to control access at the container instance, or give tasks a role)
+5. an Elastic Load Balancer (Listener+ListenerRule+TargetGroup)
+6. An Autoscaling Group
+
+links : https://aws.amazon.com/fr/blogs/containers/developers-guide-to-using-amazon-efs-with-amazon-ecs-and-aws-fargate-part-3/
 
 ## CI/CD deployement
 
